@@ -25,6 +25,11 @@
     transform: translateY(0);
   }
 
+  .navbar.is-fixed-top {
+    top: var(--top-banner-height, 0px);
+    transition: top 0.35s cubic-bezier(0.2, 0.9, 0.2, 1);
+  }
+
   .banner-inner {
     max-width: 900px;
     margin: 0 auto;
@@ -77,6 +82,7 @@
     bannerMessage.textContent = message;
     bannerLink.href = linkHref;
     bannerLink.textContent = linkText;
+    document.documentElement.style.setProperty('--top-banner-height', `${banner.offsetHeight}px`);
     banner.classList.add('show');
 
     if (banner.hideTimer) {
@@ -91,6 +97,7 @@
   function hideBanner() {
     const banner = document.getElementById('top-banner');
     banner.classList.remove('show');
+    document.documentElement.style.setProperty('--top-banner-height', '0px');
   }
 
   function shouldShowBanner() {
